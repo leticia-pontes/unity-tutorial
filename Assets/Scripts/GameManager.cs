@@ -4,10 +4,15 @@ using UnityEngine;
 public class Manager : MonoBehaviour
 {
     public GameObject perigoPrefab;
-    
-	private const int MAX_X_SPAWN_POSITION = 18;
-	private const int PERIGO_SPAWN_HEIGHT = 30;
-	private const int PLATFORM_Z_POSITION = 20;
+
+    private const float MinXSpawnPosition = -22f;
+	private const float MaxXSpawnPosition = 20f;
+	private const int PerigoSpawnHeight = 30;
+	private const int PlatformZPosition = 20;
+    private const float MinLinearDampingSpeed = 0f;
+    private const float MaxLinearDampingSpeed = 2f;
+    private const int MinPerigosToSpawn = 1;
+    private const int MaxPerigosToSpawn = 3;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -17,9 +22,19 @@ public class Manager : MonoBehaviour
 
     private IEnumerator SpawnPerigo()
     {
-        var spawnXPosition = UnityEngine.Random.Range(-MAX_X_SPAWN_POSITION, MAX_X_SPAWN_POSITION);
-        Instantiate(perigoPrefab, new Vector3(spawnXPosition, PERIGO_SPAWN_HEIGHT, PLATFORM_Z_POSITION), Quaternion.identity);
-        yield return new WaitForSeconds(1);
+        var perigosToSpawn = UnityEngine.Random.Range(MinPerigosToSpawn, MaxPerigosToSpawn);
+
+        for (int i = 0; i < perigosToSpawn; i++)
+        {
+            var spawnXPosition = UnityEngine.Random.Range(MinXSpawnPosition, MaxXSpawnPosition);
+            var linearDamping = UnityEngine.Random.Range(MinLinearDampingSpeed, MaxLinearDampingSpeed);
+        
+            var perigo = Instantiate(perigoPrefab, new Vector3(spawnXPosition, PerigoSpawnHeight, PlatformZPosition), Quaternion.identity);
+
+            perigo.GetComponent<Rigidbody>().linearDamping = linearDamping;    
+        }
+        
+        yield return new WaitForSeconds(1f);
         yield return SpawnPerigo();
     }
 

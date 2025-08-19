@@ -1,0 +1,3 @@
+Linear Dampling: The rate at which an object's linear velocity decays over time. This simulates effects like air resistance or friction, causing the object to slow down its movement.
+Angular Dampling: a force that reduces the angular velocity (rotational speed) of a Rigidbody or Rigidbody2D over time. This effect is crucial for simulating realistic physics, as it prevents objects from spinning indefinitely.
+

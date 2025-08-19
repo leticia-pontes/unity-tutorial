@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class Jogador : MonoBehaviour
 {
-    public float forceMultiplier = 10f;
-    public float velocidadeMaxima = 5f;
+    public float forceMultiplier = 12f; // Força aplicada no movimento
+    public float velocidadeMaxima = 10f; // Velocidade máxima de movimento
 
     private Rigidbody rb; // cache
 
