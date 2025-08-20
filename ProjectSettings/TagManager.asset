@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Perigo
   - Ilha
+  - Cogumelo
+  - Jogador
   layers:
   - Default
   - TransparentFX
